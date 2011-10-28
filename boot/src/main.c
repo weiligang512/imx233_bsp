@@ -10,9 +10,9 @@
 
 int ddrtest(void)
 {
-		volatile unsigned int * src= (volatile unsigned int*) 0x41f00000;
-		volatile unsigned int * dst= (volatile unsigned int*) 0x40000000;
-		unsigned int temp;
+		volatile unsigned char * src= (volatile unsigned char *) 0x41f00000;
+		volatile unsigned char * dst= (volatile unsigned char *) 0x40000000;
+		unsigned char temp;
 		unsigned int i;	
 
 		for(i=0 ; i < 0xffffff; i++ )
@@ -24,14 +24,14 @@ int ddrtest(void)
 	//		else
 	//			dst[i] = 0; 
 
-			dst[i]= i & (~0x8);
+			dst[i]= 0xff;
 		}
 		//verify
 		for(i=0 ; i < 0xffffff; i++ )
 		{
 //			if (i & 0xf)
 //				continue;
-			if((temp = dst[i]) != (i & (~0x8)))
+			if((temp = dst[i]) != 0xff)
 			{
 				PrintHex(i);
 				puts("bad:");
